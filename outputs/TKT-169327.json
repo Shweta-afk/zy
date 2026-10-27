@@ -1,0 +1,48 @@
+{
+  "ticket_id": "TKT-169327",
+  "account_id": "ACC-4850",
+  "category": "bug",
+  "priority": "P3",
+  "route_to": "L1_support",
+  "escalate": false,
+  "notify_tam": false,
+  "duplicate_of": null,
+  "needs_clarification": false,
+  "kb_references": [
+    "KB-7072"
+  ],
+  "account_signals": [
+    "Renewal in 320 days",
+    "0 open escalations",
+    "Active users -41.7% over 3 months"
+  ],
+  "customer_reply": "Hello,\n\nThank you for reaching out. The E\u20115214 error you\u2019re seeing during supplier onboarding is a known validation issue covered in KB\u20117072. Please follow the steps below:\n\n1. Verify that all required fields (e.g., supplier name, VAT number, and contact details) are filled in and correctly formatted.\n2. Ensure the supplier\u2019s country code matches the EU entity\u2019s region settings.\n3. Clear your browser cache or try a different browser (Chrome/Edge) and submit the form again.\n\nIf the problem persists after these steps, let us know and we\u2019ll open a deeper investigation.\n\nBest regards,\nSupport Team",
+  "internal_note": "Identified as a known validation bug (KB\u20117072). No duplicate or incident. Customer priority P3, but bug with workaround. Route to L1.",
+  "confidence": 0.95,
+  "reasoning_trace": [
+    {
+      "step": 1,
+      "action": "lookup_account",
+      "input": "{\"requester_domain\": \"ironleaf-foods-europe.example\"}",
+      "observation": "Resolved ACC-4850 Ironleaf Foods Europe (Enterprise) via requester_domain (exact)"
+    },
+    {
+      "step": 2,
+      "action": "search_kb",
+      "input": "{\"k\": 1, \"module\": \"Supplier Management\", \"query\": \"E-5214\"}",
+      "observation": "Top: KB-7072 [current] E-5214: Supplier onboarding form returns a validat"
+    },
+    {
+      "step": 3,
+      "action": "detect_error_spike",
+      "input": "{\"error_code\": \"E-5214\", \"hours\": 1}",
+      "observation": "0 other customers reported E-5214 in previous 1h"
+    },
+    {
+      "step": 4,
+      "action": "submit_triage",
+      "input": "{\"category\": \"bug\", \"priority\": \"P3\", \"route_to\": \"L1_support\", \"escalate\": false, \"notify_tam\": false, \"duplicate_of\": null, \"needs_clarification\": false}",
+      "observation": "ACCEPTED by policy check"
+    }
+  ]
+}

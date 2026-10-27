@@ -1,0 +1,48 @@
+{
+  "ticket_id": "TKT-160477",
+  "account_id": "ACC-1633",
+  "category": "bug",
+  "priority": "P3",
+  "route_to": "L2_engineering",
+  "escalate": false,
+  "notify_tam": false,
+  "duplicate_of": null,
+  "needs_clarification": false,
+  "kb_references": [
+    "KB-1786"
+  ],
+  "account_signals": [
+    "Renewal in 240 days",
+    "0 open escalations",
+    "Active users 4.9% over 3 months"
+  ],
+  "customer_reply": "Thank you for reaching out. The error code E\u20112207 is documented in our knowledge base article KB\u20111786, \u201cE\u20112207: E\u2011signature request is rejected.\u201d Please follow the steps outlined there to resolve the issue. If the problem persists after applying the recommended fix, let us know and we\u2019ll investigate further.",
+  "internal_note": "Ticket is a standard bug with known troubleshooting article. No duplicate or incident. Customer priority P3 matches our assessment.",
+  "confidence": 0.95,
+  "reasoning_trace": [
+    {
+      "step": 1,
+      "action": "search_kb",
+      "input": "{\"k\": 5, \"module\": \"Contracts\", \"query\": \"E-2207\"}",
+      "observation": "Top: KB-1786 [current] E-2207: E-signature request is rejected; KB-2605 [deprecated] [DEPRECATED] E-2207: E-signature request is reject; KB-1001 [current] Release notes 24.1"
+    },
+    {
+      "step": 2,
+      "action": "search_tickets",
+      "input": "{\"account_id\": \"ACC-1633\", \"days\": 7, \"error_code\": \"E-2207\", \"module\": \"Contracts\", \"open_only\": true}",
+      "observation": "0 matching tickets in previous 7d"
+    },
+    {
+      "step": 3,
+      "action": "detect_error_spike",
+      "input": "{\"error_code\": \"E-2207\", \"hours\": 24}",
+      "observation": "0 other customers reported E-2207 in previous 24h"
+    },
+    {
+      "step": 4,
+      "action": "submit_triage",
+      "input": "{\"category\": \"bug\", \"priority\": \"P3\", \"route_to\": \"L2_engineering\", \"escalate\": false, \"notify_tam\": false, \"duplicate_of\": null, \"needs_clarification\": false}",
+      "observation": "ACCEPTED by policy check"
+    }
+  ]
+}

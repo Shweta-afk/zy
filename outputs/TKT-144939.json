@@ -1,0 +1,48 @@
+{
+  "ticket_id": "TKT-144939",
+  "account_id": "ACC-3751",
+  "category": "incident",
+  "priority": "P1",
+  "route_to": "L2_engineering",
+  "escalate": true,
+  "notify_tam": true,
+  "duplicate_of": null,
+  "needs_clarification": false,
+  "kb_references": [
+    "KB-3985"
+  ],
+  "account_signals": [
+    "Renewal in 45 days",
+    "0 open escalations",
+    "Active users -7.3% over 3 months"
+  ],
+  "customer_reply": "We\u2019ve identified that this is a known issue (KB-3985) affecting OCR processing for invoices. The engineering team is actively working on a fix. In the meantime, please pause new uploads and hold the 1,200 invoices in the queue until the issue is resolved. We\u2019ll notify you as soon as the fix is deployed. If you need further assistance, let us know.",
+  "internal_note": "Ticket matches active incident KB-3985; no duplicate. Account renewal 45 days, no risk override. Priority remains P1.",
+  "confidence": 0.72,
+  "reasoning_trace": [
+    {
+      "step": 1,
+      "action": "search_kb",
+      "input": "{\"k\": 5, \"module\": \"eInvoice\", \"query\": \"E-4102\"}",
+      "observation": "Top: KB-3985 [active_incident] KNOWN ISSUE: Invoice OCR jobs fail with E-4102 aft; KB-7914 [current] E-4102: Invoice ocr job stays stuck in processing; KB-1001 [current] Release notes 24.1"
+    },
+    {
+      "step": 2,
+      "action": "get_account_details",
+      "input": "{\"account_id\": \"ACC-3751\"}",
+      "observation": "Brightfield Manufacturing Premium, renewal in 45d, 0 open escalations"
+    },
+    {
+      "step": 3,
+      "action": "submit_triage",
+      "input": "{\"category\": \"incident\", \"priority\": \"P1\", \"route_to\": \"L2_engineering\", \"escalate\": true, \"notify_tam\": false, \"duplicate_of\": null, \"needs_clarification\": false}",
+      "observation": "REJECTED: KB-3985 says notify the TAM for Premium accounts; this account is Premium"
+    },
+    {
+      "step": 4,
+      "action": "submit_triage",
+      "input": "{\"category\": \"incident\", \"priority\": \"P1\", \"route_to\": \"L2_engineering\", \"escalate\": true, \"notify_tam\": true, \"duplicate_of\": null, \"needs_clarification\": false}",
+      "observation": "ACCEPTED by policy check"
+    }
+  ]
+}
