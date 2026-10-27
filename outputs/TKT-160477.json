@@ -3,7 +3,7 @@
   "account_id": "ACC-1633",
   "category": "bug",
   "priority": "P3",
-  "route_to": "L2_engineering",
+  "route_to": "L1_support",
   "escalate": false,
   "notify_tam": false,
   "duplicate_of": null,
@@ -16,8 +16,8 @@
     "0 open escalations",
     "Active users 4.9% over 3 months"
   ],
-  "customer_reply": "Thank you for reaching out. The error code E\u20112207 is documented in our knowledge base article KB\u20111786, \u201cE\u20112207: E\u2011signature request is rejected.\u201d Please follow the steps outlined there to resolve the issue. If the problem persists after applying the recommended fix, let us know and we\u2019ll investigate further.",
-  "internal_note": "Ticket is a standard bug with known troubleshooting article. No duplicate or incident. Customer priority P3 matches our assessment.",
+  "customer_reply": "Hello,\n\nThank you for reaching out. The error code **E\u20112207** indicates that the e\u2011signature request was rejected due to a configuration issue. Please follow the steps in our current troubleshooting article **KB\u20111786 \u2013 \"E\u20112207: E\u2011signature request is rejected\"**:\n\n1. Verify that the signing party\u2019s email address is correctly entered and matches the address on file.\n2. Ensure the signing party\u2019s account is active and has the required permissions.\n3. Check that the document\u2019s signing workflow is correctly configured (e.g., the correct signer role is assigned).\n4. If the issue persists, clear the browser cache or try a different browser.\n\nIf after completing these steps the error still occurs, let us know and we\u2019ll open a deeper investigation.\n\nBest regards,\nSupport Team",
+  "internal_note": "Ticket is a bug with specific error E-2207; current KB article KB-1786 provides solution. No duplicate, no risk, no incident. Customer priority P3 retained.",
   "confidence": 0.95,
   "reasoning_trace": [
     {
@@ -34,14 +34,14 @@
     },
     {
       "step": 3,
-      "action": "detect_error_spike",
-      "input": "{\"error_code\": \"E-2207\", \"hours\": 24}",
-      "observation": "0 other customers reported E-2207 in previous 24h"
+      "action": "get_account_details",
+      "input": "{\"account_id\": \"ACC-1633\"}",
+      "observation": "Frostline Retail Group Standard, renewal in 240d, 0 open escalations"
     },
     {
       "step": 4,
       "action": "submit_triage",
-      "input": "{\"category\": \"bug\", \"priority\": \"P3\", \"route_to\": \"L2_engineering\", \"escalate\": false, \"notify_tam\": false, \"duplicate_of\": null, \"needs_clarification\": false}",
+      "input": "{\"category\": \"bug\", \"priority\": \"P3\", \"route_to\": \"L1_support\", \"escalate\": false, \"notify_tam\": false, \"duplicate_of\": null, \"needs_clarification\": false}",
       "observation": "ACCEPTED by policy check"
     }
   ]

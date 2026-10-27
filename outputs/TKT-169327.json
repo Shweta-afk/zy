@@ -16,8 +16,8 @@
     "0 open escalations",
     "Active users -41.7% over 3 months"
   ],
-  "customer_reply": "Hello,\n\nThank you for reaching out. The E\u20115214 error you\u2019re seeing during supplier onboarding is a known validation issue covered in KB\u20117072. Please follow the steps below:\n\n1. Verify that all required fields (e.g., supplier name, VAT number, and contact details) are filled in and correctly formatted.\n2. Ensure the supplier\u2019s country code matches the EU entity\u2019s region settings.\n3. Clear your browser cache or try a different browser (Chrome/Edge) and submit the form again.\n\nIf the problem persists after these steps, let us know and we\u2019ll open a deeper investigation.\n\nBest regards,\nSupport Team",
-  "internal_note": "Identified as a known validation bug (KB\u20117072). No duplicate or incident. Customer priority P3, but bug with workaround. Route to L1.",
+  "customer_reply": "Thank you for reaching out. The error code E\u20115214 indicates a validation issue during supplier onboarding. Please follow the steps in KB\u20117072 to resolve it: ensure all required fields are populated, correct any formatting errors, and resubmit the form. If the problem persists, let us know and we\u2019ll investigate further.",
+  "internal_note": "Single user error, no duplicate, no risk, P3.",
   "confidence": 0.95,
   "reasoning_trace": [
     {
@@ -34,9 +34,9 @@
     },
     {
       "step": 3,
-      "action": "detect_error_spike",
-      "input": "{\"error_code\": \"E-5214\", \"hours\": 1}",
-      "observation": "0 other customers reported E-5214 in previous 1h"
+      "action": "search_tickets",
+      "input": "{\"account_id\": \"ACC-4850\", \"days\": 7, \"error_code\": \"E-5214\", \"module\": \"Supplier Management\", \"open_only\": true}",
+      "observation": "0 matching tickets in previous 7d"
     },
     {
       "step": 4,

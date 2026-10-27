@@ -1,25 +1,24 @@
 {
   "ticket_id": "TKT-192732",
   "account_id": "ACC-6031",
-  "category": "duplicate",
-  "priority": "P3",
-  "route_to": "L1_support",
+  "category": "bug",
+  "priority": "P2",
+  "route_to": "L2_engineering",
   "escalate": false,
   "notify_tam": false,
-  "duplicate_of": "TKT-122022",
+  "duplicate_of": null,
   "needs_clarification": false,
   "kb_references": [
-    "KB-2982",
-    "KB-5930"
+    "KB-2982"
   ],
   "account_signals": [
     "Renewal in 46 days",
     "0 open escalations",
     "Active users -4.3% over 3 months"
   ],
-  "customer_reply": "Thank you for reaching out. We see that you have an existing open ticket (TKT-122022) for the same issue. Please refer to that ticket for updates and resolution. If you have any new information or the issue persists after the suggested steps, let us know and we\u2019ll reopen or create a new ticket.",
-  "internal_note": "Duplicate of TKT-122022, same error E-6105, same module. No escalation needed.",
-  "confidence": 0.92,
+  "customer_reply": "Thank you for reaching out. The error code E-6105 indicates a dashboard refresh issue. Please follow the steps in KB-2982 to resolve it: clear your browser cache, ensure you\u2019re using a supported browser, and try re\u2011loading the dashboard. If the problem persists, let us know and we\u2019ll open a support case for deeper investigation.",
+  "internal_note": "E-6105 is a known bug with a documented fix in KB-2982. No spike or incident. Account not at risk. Customer set P2, so keep that priority.",
+  "confidence": 0.95,
   "reasoning_trace": [
     {
       "step": 1,
@@ -29,32 +28,20 @@
     },
     {
       "step": 2,
+      "action": "detect_error_spike",
+      "input": "{\"error_code\": \"E-6105\", \"hours\": 1}",
+      "observation": "0 other customers reported E-6105 in previous 1h"
+    },
+    {
+      "step": 3,
       "action": "get_account_details",
       "input": "{\"account_id\": \"ACC-6031\"}",
       "observation": "Riverbend Health Enterprise, renewal in 46d, 0 open escalations"
     },
     {
-      "step": 3,
-      "action": "search_tickets",
-      "input": "{\"account_id\": \"ACC-6031\", \"days\": 7, \"error_code\": \"E-6105\", \"module\": \"Spend Analytics\", \"open_only\": true}",
-      "observation": "1 matching tickets in previous 7d: TKT-122022 (open, Spend dashboard not refreshing - E-6105)"
-    },
-    {
       "step": 4,
       "action": "submit_triage",
-      "input": "{\"category\": \"duplicate\", \"priority\": \"P3\", \"route_to\": \"L1_support\", \"escalate\": false, \"notify_tam\": false, \"duplicate_of\": \"TKT-122022\", \"needs_clarification\": false}",
-      "observation": "REJECTED: No kb_references cited"
-    },
-    {
-      "step": 5,
-      "action": "get_kb_article",
-      "input": "{\"kb_id\": \"KB-2982\"}",
-      "observation": "Read KB-2982 'E-6105: Dashboard does not refresh' [current]"
-    },
-    {
-      "step": 6,
-      "action": "submit_triage",
-      "input": "{\"category\": \"duplicate\", \"priority\": \"P3\", \"route_to\": \"L1_support\", \"escalate\": false, \"notify_tam\": false, \"duplicate_of\": \"TKT-122022\", \"needs_clarification\": false}",
+      "input": "{\"category\": \"bug\", \"priority\": \"P2\", \"route_to\": \"L2_engineering\", \"escalate\": false, \"notify_tam\": false, \"duplicate_of\": null, \"needs_clarification\": false}",
       "observation": "ACCEPTED by policy check"
     }
   ]

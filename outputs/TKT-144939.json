@@ -16,8 +16,8 @@
     "0 open escalations",
     "Active users -7.3% over 3 months"
   ],
-  "customer_reply": "We\u2019ve identified that this is a known issue (KB-3985) affecting OCR processing for invoices. The engineering team is actively working on a fix. In the meantime, please pause new uploads and hold the 1,200 invoices in the queue until the issue is resolved. We\u2019ll notify you as soon as the fix is deployed. If you need further assistance, let us know.",
-  "internal_note": "Ticket matches active incident KB-3985; no duplicate. Account renewal 45 days, no risk override. Priority remains P1.",
+  "customer_reply": "We have identified that this issue is part of a known active incident (KB-3985). Our engineering team is already working on a fix. In the meantime, please pause new invoice uploads and use the manual processing workaround described in KB-3985. We will keep you updated on progress.",
+  "internal_note": "Active incident KB-3985, P1, route to L2_engineering, notify TAM for Premium account.",
   "confidence": 0.72,
   "reasoning_trace": [
     {
@@ -28,15 +28,15 @@
     },
     {
       "step": 2,
-      "action": "get_account_details",
-      "input": "{\"account_id\": \"ACC-3751\"}",
-      "observation": "Brightfield Manufacturing Premium, renewal in 45d, 0 open escalations"
-    },
-    {
-      "step": 3,
       "action": "submit_triage",
       "input": "{\"category\": \"incident\", \"priority\": \"P1\", \"route_to\": \"L2_engineering\", \"escalate\": true, \"notify_tam\": false, \"duplicate_of\": null, \"needs_clarification\": false}",
       "observation": "REJECTED: KB-3985 says notify the TAM for Premium accounts; this account is Premium"
+    },
+    {
+      "step": 3,
+      "action": "lookup_account",
+      "input": "{\"account_id\": \"ACC-3751\"}",
+      "observation": "Resolved ACC-3751 Brightfield Manufacturing (Premium) via account_id"
     },
     {
       "step": 4,
