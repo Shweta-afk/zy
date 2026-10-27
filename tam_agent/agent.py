@@ -16,7 +16,7 @@ import time
 
 from .llm import LLMClient
 from .schema import CATEGORIES, PRIORITIES, ROUTES, validate
-from .tools import (Toolbox, check_decision, canonical_module, error_codes_of, INJECTION_RE, EXPOSURE_RE,
+from .tools import (Toolbox, check_decision, canonical_module, deadline_hours, error_codes_of, INJECTION_RE, EXPOSURE_RE,
                     POLICY_IDS)
 
 MAX_STEPS = 14
@@ -120,6 +120,7 @@ def _briefing(ticket: dict, box: Toolbox) -> str:
         "error_codes_found_in_text": codes,
         "account_id_blank": not ticket.get("account_id"),
         "possible_prompt_injection": bool(INJECTION_RE.search(f"{ticket.get('subject')} {ticket.get('description')}")),
+        "deadline_hours_stated": deadline_hours(f"{ticket.get('subject')} {ticket.get('description')}"),
     }
     meta = {k: ticket.get(k) for k in ("ticket_id", "account_id", "company_name_raw", "requester_domain",
                                        "created_at", "channel", "module", "error_code", "customer_priority", "status")}

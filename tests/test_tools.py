@@ -10,7 +10,7 @@ except ImportError:  # plain-python mode, see bottom of file
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tam_agent.data import load_accounts, load_tickets, load_usage  # noqa: E402
 from tam_agent.kb import load_kb  # noqa: E402
-from tam_agent.tools import Toolbox, check_decision, canonical_module, error_codes_of  # noqa: E402
+from tam_agent.tools import Toolbox, check_decision, canonical_module, deadline_hours, error_codes_of  # noqa: E402
 
 
 def _fixture(f):
@@ -31,6 +31,11 @@ def test_module_aliases():
     assert canonical_module("supplier portal") == "Supplier Management"
     assert canonical_module("analytics") == "Spend Analytics"
     assert canonical_module("") is None
+
+
+def test_deadline_detection():
+    assert deadline_hours("The event closes in 2 days.") == 48
+    assert deadline_hours("needs fixing before quarter close") is None
 
 
 def test_error_code_from_description_when_field_blank():

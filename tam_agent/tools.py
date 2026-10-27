@@ -40,6 +40,23 @@ INJECTION_RE = re.compile(
     r"classify this ticket as|set (this|priority) to p[1-4]|include the full list|you are now)", re.I)
 
 # Phrases that suggest one party can see another party's data (KB-6401).
+# Business deadlines stated in the text (KB-2914: "business deadline at risk within 72 hours" -> P2).
+DEADLINE_RE = re.compile(r"(?:closes?|due|deadline|go-?live|cut-?off|ends?)\s+(?:in|within)\s+(\d+|one|two|three)\s+"
+                         r"(hours?|days?)|\b(today|tonight|tomorrow)\b", re.I)
+_NUM = {"one": 1, "two": 2, "three": 3}
+
+
+def deadline_hours(text: str) -> float | None:
+    """Hours until a deadline mentioned in the ticket text, or None if none is stated."""
+    m = DEADLINE_RE.search(text)
+    if not m:
+        return None
+    if m.group(3):
+        return {"today": 12, "tonight": 12, "tomorrow": 24}[m.group(3).lower()]
+    n = int(_NUM.get(m.group(1).lower(), m.group(1)))
+    return n if m.group(2).lower().startswith("hour") else n * 24
+
+
 EXPOSURE_RE = re.compile(
     r"(can|could) (see|view|access).{0,80}(other|another|competing|competitor|different) "
     r"(supplier|customer|tenant|company|vendor)|"
@@ -419,6 +436,12 @@ def check_decision(box: Toolbox, ticket: dict, d: dict, first_attempt: bool) -> 
 
     # Soft checks
     text = f"{ticket.get('subject', '')} {ticket.get('description', '')}"
+    hrs = deadline_hours(text)
+    if hrs is not None and hrs <= 72 and pri in ("P3", "P4") and cat in ("bug", "incident"):
+        w.append(f"Ticket states a business deadline about {hrs:.0f}h away; KB-2914 makes 'deadline at risk within "
+                 "72 hours' P2 (route L2_engineering)")
+    if cat == "feature_request" and pri != "P4" and not (acct and not dup and box.risk_facts(acct)["account_risk_override"]):
+        w.append("KB-2914 defines feature requests as P4 (unless the account risk override applies)")
     if EXPOSURE_RE.search(text) and cat != "security":
         w.append("Ticket text suggests one party can see another party's data - KB-6401 treats that as security/P1")
     if INJECTION_RE.search(text) and not re.search(r"inject|untrusted|instruction", d.get("internal_note", ""), re.I):
