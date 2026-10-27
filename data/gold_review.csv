@@ -1,0 +1,11 @@
+ticket_id,account_id,category,priority,route_to,escalate,notify_tam,duplicate_of,needs_clarification,must_cite
+TKT-144939,ACC-3751,incident,P1,L2_engineering,true,true,,false,KB-3985
+TKT-119877,ACC-2431,how_to,P3,L1_support,true,true,,false,KB-6082
+TKT-160477,ACC-1633,bug,P3,L1_support,false,false,,false,KB-1786
+TKT-192732,ACC-6031,duplicate,P3,L1_support,false,false,TKT-122022,false,KB-5930
+TKT-169327,ACC-4850,bug,P3,L1_support,false,false,,false,KB-7072
+TKT-160067,ACC-8892,feature_request,P4,product,false,false,,false,KB-4859
+TKT-160094,ACC-2507,bug,P2,L2_engineering,false,false,,false,KB-4795
+TKT-128253,ACC-3737,needs_info,P3,L1_support,false,false,,true,
+TKT-135081,ACC-7533,security,P1,security,true,false,,false,KB-6401
+TKT-158764,ACC-3600,how_to,P4,L1_support,false,false,,false,KB-4449

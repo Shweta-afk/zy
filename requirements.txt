@@ -1,0 +1,5 @@
+# No third-party packages are needed: the project uses only the Python standard library
+# (csv, json, urllib), so it runs on machines where compiled packages are blocked.
+# Optional:
+# pytest          # to run tests (python -m pytest -q); tests also run with: python tests/test_tools.py
+# anthropic       # only if LLM_PROVIDER=anthropic
